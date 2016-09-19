@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  desk_id: 1
+  description: MyText
+  reservation_date: 2016-09-19
+  reservation_pm: false
+  reservation_am: false
+
+two:
+  desk_id: 1
+  description: MyText
+  reservation_date: 2016-09-19
+  reservation_pm: false
+  reservation_am: false
