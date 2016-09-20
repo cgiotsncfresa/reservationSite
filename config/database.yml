@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: reservationSite_production
   username: reservationSite
   password: <%= ENV['RESERVATIONSITE_DATABASE_PASSWORD'] %>
