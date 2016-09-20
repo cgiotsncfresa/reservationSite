@@ -53,3 +53,5 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'bootstrap', '~> 4.0.0.alpha4'
 
 gem 'rails_12factor', group: :production
+
+gem 'oj'

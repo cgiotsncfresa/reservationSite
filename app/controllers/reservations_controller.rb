@@ -1,3 +1,5 @@
+require 'oj'
+
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
@@ -24,8 +26,13 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    puts reservation_params['data'];
-    @reservation = Reservation.new()
+    if(reservation_params['data'])
+        reservation_values = Oj.load(reservation_params['data']);
+        @reservation = Reservation.new(reservation_values);
+    else
+        @reservation = Reservation.new(reservation_params);
+    end 
+  
 
     respond_to do |format|
       if @reservation.save
