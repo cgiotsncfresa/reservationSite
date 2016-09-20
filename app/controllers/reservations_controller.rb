@@ -29,7 +29,7 @@ class ReservationsController < ApplicationController
   def create
     if(params['data'])
         reservation_hash = oj.load(params['data']);    
-        @reservation = Reservation.new(reservation_am: reservation_hash.reservation_am, reservation_pm: reservation_hash.reservation_pm)
+        @reservation = Reservation.new(reservation_am: reservation_hash[:reservation_am], reservation_pm: reservation_hash[:reservation_pm])
     else
         @reservation = Reservation.new(reservation_params)
     end 
