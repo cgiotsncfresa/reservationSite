@@ -27,8 +27,8 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    if(params['data'])        
-        @reservation = Reservation.new(params['data']);
+    if(params['data'])              
+        @reservation = Reservation.new(reservation_am:params['data'].reservation_am, reservation_pm:params['data'].reservation_pm);
     else
         @reservation = Reservation.new(reservation_params);
     end 
