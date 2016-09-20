@@ -28,7 +28,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     if(params['data'])
-        reservation_str = params['data'].gsub! '\"', ''
+        reservation_str = params['data'].gsub '\"', ''
         puts reservation_str
         reservation_hash = Oj.load(reservation_str)     
         @reservation = Reservation.new(reservation_am: reservation_hash.reservation_am, reservation_pm: reservation_hash.reservation_pm)
