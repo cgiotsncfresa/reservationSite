@@ -28,8 +28,9 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     if(params['data'])
-        puts params['data'].type              
-        @reservation = Reservation.new(reservation_am: params['data'].reservation_am, reservation_pm: params['data'].reservation_pm)
+        puts params
+        reservation_hash = Oj.load(params['data'])     
+        @reservation = Reservation.new(reservation_am: reservation_hash.reservation_am, reservation_pm: reservation_hash.reservation_pm)
     else
         @reservation = Reservation.new(reservation_params)
     end 
