@@ -24,7 +24,8 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    puts reservation_params['data'];
+    @reservation = Reservation.new()
 
     respond_to do |format|
       if @reservation.save
