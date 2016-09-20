@@ -27,8 +27,8 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    if(reservation_params['data'])
-        reservation_values = Oj.load(reservation_params['data']);
+    if(params['data'])
+        reservation_values = Oj.load(params['data']);
         @reservation = Reservation.new(reservation_values);
     else
         @reservation = Reservation.new(reservation_params);
