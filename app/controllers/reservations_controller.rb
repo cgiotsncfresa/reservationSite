@@ -1,4 +1,4 @@
-require 'json'
+require 'oj'
 
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
@@ -28,9 +28,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     if(params['data'])
-        reservation_str = params['data'].gsub '\"', ''
-        puts reservation_str.class
-        reservation_hash = JSON.parse(reservation_str);    
+        reservation_hash = oj.load(params['data']);    
         @reservation = Reservation.new(reservation_am: reservation_hash.reservation_am, reservation_pm: reservation_hash.reservation_pm)
     else
         @reservation = Reservation.new(reservation_params)
