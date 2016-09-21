@@ -55,7 +55,8 @@ class ReservationsController < ApplicationController
          if(params['data'])
             reservation_hash = Oj.load(params['data'])
             @reservation = Reservation.find(reservation_hash[:id])
-         end 
+         end
+      end  
       if @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
