@@ -63,7 +63,8 @@ class ReservationsController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
-      end  
+      end
+    end  
   end
 
   # DELETE /reservations/1
