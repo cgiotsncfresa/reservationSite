@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th>Desk</th>
+      <th>Identifiant de l'appareil</th>
       <th>Description</th>
       <th>Reservation date</th>
       <th>Reservation pm</th>
@@ -19,6 +20,7 @@
     <% @reservations.each do |reservation| %>
       <tr>
         <td><%= reservation.desk_id %></td>
+        <td><%= reservation.devide_id %></td>
         <td><%= reservation.description %></td>
         <td><%= reservation.reservation_date %></td>
         <td><%= reservation.reservation_pm %></td>
