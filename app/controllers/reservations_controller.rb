@@ -29,8 +29,8 @@ class ReservationsController < ApplicationController
   def create
     if(params['data'])
         reservation_hash = Oj.load(params['data']);      
-        #@reservation = Reservation.new(reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
-        @reservation = Reservation.new(reservation_hash)
+        @reservation = Reservation.new(reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
+        #@reservation = Reservation.new(reservation_hash)
     else
         @reservation = Reservation.new(reservation_params)
     end 
@@ -55,9 +55,11 @@ class ReservationsController < ApplicationController
          if(params['data'])
             reservation_hash = Oj.load(params['data'])
             @reservation = Reservation.find(reservation_hash[:id])
+            if @reservation.update(reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
+              format.json { render :show, status: :ok, location: @reservation }
+            end 
          end
-      end  
-      if @reservation.update(reservation_params)
+      elsif @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
       else
