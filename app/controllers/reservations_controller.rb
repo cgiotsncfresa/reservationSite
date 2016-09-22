@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
   def create
     if(params['data'])
         reservation_hash = Oj.load(params['data']);      
-        @reservation = Reservation.new(reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
+        @reservation = Reservation.new(device_id: reservation_hash["deviceId"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
         #@reservation = Reservation.new(reservation_hash)
     else
         @reservation = Reservation.new(reservation_params)
@@ -57,7 +57,7 @@ class ReservationsController < ApplicationController
       if !@reservation && params['data']
             reservation_hash = Oj.load(params['data'])
             @reservation = Reservation.find(reservation_hash[:id])
-            if @reservation.update(device_id: reservation_hash["device_id"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
+            if @reservation.update(device_id: reservation_hash["deviceId"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
               format.json { render :show, status: :ok, location: @reservation }
             end         
       elsif @reservation.update(reservation_params)
@@ -84,7 +84,7 @@ class ReservationsController < ApplicationController
     if @reservation && @reservation.device_id
       x = if @reservation.reservation_am
       ##calling function to udpate leds
-       Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'am')             
+      Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'am')             
       elsif @reservation.reservation_pm
       ##calling function to udpate leds
       Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'pm')      
