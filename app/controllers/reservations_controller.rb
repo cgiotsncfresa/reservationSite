@@ -58,7 +58,7 @@ class ReservationsController < ApplicationController
          if(params['data'])
             reservation_hash = Oj.load(params['data'])
             @reservation = Reservation.find(reservation_hash[:id])
-            if @reservation.update(:device_id: reservation_hash["device_id"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
+            if @reservation.update(device_id: reservation_hash["device_id"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
               format.json { render :show, status: :ok, location: @reservation }
             end 
          end
@@ -69,8 +69,7 @@ class ReservationsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
-    end
-      
+    end      
   end
 
   # DELETE /reservations/1
@@ -97,6 +96,7 @@ class ReservationsController < ApplicationController
       end  
     end 
   end 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
