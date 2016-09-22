@@ -19,10 +19,9 @@
   <tbody>
    
     <% @reservations.each do |reservation| %>
-     <%=debug reservation %>  
       <tr>
         <td><%= reservation.desk_id %></td>
-        <td></td>
+        <td><%= reservation.device_id %></td>
         <td><%= reservation.description %></td>
         <td><%= reservation.reservation_date %></td>
         <td><%= reservation.reservation_pm %></td>
