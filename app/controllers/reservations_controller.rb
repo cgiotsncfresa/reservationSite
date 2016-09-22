@@ -82,17 +82,15 @@ class ReservationsController < ApplicationController
   # POST on button device to update leds
   def call_button
     if @reservation && @reservation.device_id
-      x = if @reservation.reservation_am
-      ##calling function to udpate leds
-      Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'am')             
-      elsif @reservation.reservation_pm
-      ##calling function to udpate leds
-      Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'pm')      
+      reqstArg = if @reservation.reservation_am  && !@reservation.reservation_pm
+        "am"
+      elsif @reservation.reservation_pm && !@reservation.reservation_am
+        "pm"
       elsif @reservation.reservation_am && @reservation.reservation_pm
-      ##calling function to udpate leds
-      Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'ampm')
+        "ampm"
       end
-      puts x.body  
+      ##calling function to udpate leds
+      Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> reqstArg)  
     end 
   end 
 
