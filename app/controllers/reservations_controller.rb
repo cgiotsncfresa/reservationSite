@@ -59,8 +59,7 @@ class ReservationsController < ApplicationController
             @reservation = Reservation.find(reservation_hash[:id])
             if @reservation.update(device_id: reservation_hash["device_id"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
               format.json { render :show, status: :ok, location: @reservation }
-            end 
-         end
+            end         
       elsif @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
