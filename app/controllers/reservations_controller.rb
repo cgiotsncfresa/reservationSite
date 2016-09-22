@@ -54,8 +54,7 @@ class ReservationsController < ApplicationController
   # PATCH/PUT /reservations/1.json
   def update
     respond_to do |format|
-      if !@reservation
-         if(params['data'])
+      if !@reservation && params['data']
             reservation_hash = Oj.load(params['data'])
             @reservation = Reservation.find(reservation_hash[:id])
             if @reservation.update(device_id: reservation_hash["device_id"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
@@ -96,7 +95,7 @@ class ReservationsController < ApplicationController
       end  
     end 
   end 
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
