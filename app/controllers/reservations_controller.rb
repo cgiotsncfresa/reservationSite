@@ -91,7 +91,8 @@ class ReservationsController < ApplicationController
       elsif @reservation.reservation_am && @reservation.reservation_pm
       ##calling function to udpate leds
       Net::HTTP.post_form(URI.parse('https://api.particle.io/v1/devices/'+@reservation.device_id+'/setBtnLeds'),'access_token'=>'4b481cdd6ca24ffdd5ee6e4adb78c4dc61cc88fa', 'arg'=> 'ampm')
-      end  
+      end
+      puts x.body  
     end 
   end 
 
