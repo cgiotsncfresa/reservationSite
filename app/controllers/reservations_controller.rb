@@ -5,7 +5,7 @@ require "net/http"
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   after_action :call_button, only: [:update]
-  skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create, :update]
 
   # GET /reservations
   # GET /reservations.json
