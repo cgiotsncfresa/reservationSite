@@ -56,6 +56,7 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if !@reservation && params['data']
             reservation_hash = Oj.load(params['data'])
+            puts reservation_hash
             @reservation = Reservation.find(reservation_hash[:id])
             if @reservation.update(device_id: reservation_hash["deviceId"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
               format.json { render :show, status: :ok, location: @reservation }
