@@ -3,7 +3,7 @@ require "uri"
 require "net/http"
 
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :edit, :destroy]
   after_action :call_button, only: [:update]
   skip_before_action :verify_authenticity_token, only: [:create, :update]
 
@@ -60,7 +60,10 @@ class ReservationsController < ApplicationController
             if @reservation.update(device_id: reservation_hash["deviceId"], reservation_am: reservation_hash["reservation_am"], reservation_pm: reservation_hash["reservation_pm"])
               format.json { render :show, status: :ok, location: @reservation }
             end         
-      elsif @reservation.update(reservation_params)
+      else 
+        set_reservation
+      end                
+      if @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
       else
